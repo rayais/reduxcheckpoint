@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
+import { Provider } from 'react-redux';
+import Home from './components/Home';
+import { store } from './Redux/Store';
+import Newt from './components/Newt';
+import OneTask from './components/Task';
 
 function App() {
+
+  const router=createBrowserRouter([
+    {
+      path:'/',
+      element:<Home/>},{
+      path:'/newtask',
+      element:<Newt/>},{
+      path:'/task/:id',
+      element:<OneTask/>
+    },
+  ])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Provider store={store}>
+        <RouterProvider router={router}/>
+      </Provider>
     </div>
   );
 }
